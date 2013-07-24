@@ -5,4 +5,4 @@ all:
 	$(CXX) -g -Wall -o $(BIN) *.c
 
 clean:
-	rm -rf $(BIN)
+	rm -rf $(BIN) *.o* *.so*

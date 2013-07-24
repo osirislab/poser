@@ -6,7 +6,7 @@ VER = 0.1
 
 all:
 	$(CXX) -fPIC -c $(SRC)
-	$(CXX) -shared -Wl,-soname,$(NAME).$(VER) -o $(NAME).$(VER) *.o
+	$(CXX) -shared -ldl -Wl,-soname,$(NAME).$(VER) -o $(NAME).$(VER) *.o
 
 test: all
 	cp $(NAME).$(VER) ../test/
