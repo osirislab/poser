@@ -1,10 +1,17 @@
 CXX = `which gcc`
-SRC = '*.c'
+SRC = *.c
+NAME = libposer.so
+VER = 0.1 
+
 
 all:
 	$(CXX) -fPIC -c $(SRC)
-	$(CXX) -shared -Wl,-soname,libposer.so.1 -o libposer.so.1.0 *.o
+	$(CXX) -shared -Wl,-soname,$(NAME).$(VER) -o $(NAME).$(VER) *.o
+
+test: all
+	cp $(NAME).$(VER) ../test/
+	cd ../test/ && make && LD_PRELOAD=`pwd`/$(NAME).$(VER) ./test
 
 clean:
-	rm -rf *.so*
+	rm -rf *.o *.so*
 
