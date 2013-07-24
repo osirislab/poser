@@ -1,0 +1,8 @@
+*.o
+.*.swp
+.*.swo
+~*
+doxydoc/
+*.rc
+Doxyfile
+.rvmrc
