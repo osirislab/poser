@@ -17,5 +17,3 @@ void * malloc(size_t size) {
 	printf("%p = malloc(size = %d)\n", ret, (unsigned int) size);	
 	return(ret);
 }
-
-	
