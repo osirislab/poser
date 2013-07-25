@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <dlfcn.h>
 #include <string.h>
-//#include <sys/ptrace.h>
+
+/* this is called antidebug.c because it provides some basic countermeasuers
+ * to traditional antidebugging technologies. */
 
 bool value_of_strP(const char * var, const char * value) {
 	size_t max = strlen(value); 

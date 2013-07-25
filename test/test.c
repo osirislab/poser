@@ -1,3 +1,5 @@
+#define _XOPEN_SOURCE
+#include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -24,6 +26,8 @@ int main(int argc, char * argv[]) {
 	void * buf = malloc(1024);
 	printf("%p\n", buf);
 	printf("file descriptor = %d\n", fd);
+	char * secret = crypt("password", "this is a salt");
+	printf("secret = %s\n", secret);
 	printf("Test END\n");
 	return(0);
 }

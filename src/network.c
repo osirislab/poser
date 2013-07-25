@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
-#include "poser.h"
 
 
 //TODO: metaprogram this for auto generation.
