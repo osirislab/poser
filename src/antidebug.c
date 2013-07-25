@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <dlfcn.h>
 #include <string.h>
+//#include <sys/ptrace.h>
 
 bool value_of_strP(const char * var, const char * value) {
 	size_t max = strlen(value); 
@@ -19,11 +20,28 @@ char * getenv(const char * name) {
 	
 	if (value_of_strP(name, "LD_PRELOAD")==true)  {
 		printf("Antidebugging detected: getenv(\"LD_PRELOAD\")\n");
+		printf("setting getenv(%s) = NULL\n", name);
 	} else { 
 		if (!real_getenv) real_getenv = dlsym(RTLD_NEXT, "getenv");
 		ret = real_getenv(name);
 	} 
 
-	printf("%s = getenv(%s)", ret, name);
+	printf("%s = getenv(%s)\n", ret, name);
+	return(ret);
+}
+
+#define PTRACE_TRACEME 0
+
+long ptrace(int request, pid_t pid, void *addr, void *data) {
+	long ret;
+
+	static long (*real_ptrace)(int, pid_t, void *, void *) = NULL;
+	if (request == PTRACE_TRACEME) {
+		printf("Antidebugging detected: PTRACE_TRACEME call\n");
+		ret = 0;
+	} else {
+		if (!real_ptrace) real_ptrace = dlsym(RTLD_NEXT, "ptrace");
+		ret = real_ptrace(request, pid, addr, data);
+	}
 	return(ret);
 }

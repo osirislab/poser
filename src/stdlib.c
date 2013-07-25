@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <dlfcn.h>
 
-typedef void * (*malloc_ptr)(size_t);
 
 void * malloc(size_t size) {
 	static void * (*real_malloc)(size_t) = NULL;
@@ -17,3 +16,14 @@ void * malloc(size_t size) {
 	printf("%p = malloc(size = %d)\n", ret, (unsigned int) size);	
 	return(ret);
 }
+
+// this is broken for now
+/*
+void free(void * ptr) {
+	static void (*real_free)(void *) = NULL;
+	
+	if (!real_free) real_free = dlsym(RTLD_NEXT, "free");
+	real_free(ptr);
+	printf("free(%p)\n", ptr);
+}
+*/
