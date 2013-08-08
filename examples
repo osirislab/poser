@@ -1,3 +1,5 @@
+Here's an example on how to run poser:
+
 LD_PRELOAD=`pwd`/libposer.so.0.1  /bin/ls
 0x1337040 = malloc(size = 568)
 0x1337280 = malloc(size = 120)
